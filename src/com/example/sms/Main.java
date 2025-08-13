@@ -8,7 +8,7 @@ public class Main {
   static final Scanner sc = new Scanner(System.in);
 
   public static void main(String[] args) throws Exception {
-    var svc = new StudentService();
+    var stds = new StudentService();
     while (true) {
       System.out.println("\n=== Student Management ===");
       System.out.println("1. List All");
@@ -21,11 +21,11 @@ public class Main {
       String ch = sc.nextLine().trim();
       try {
         switch (ch) {
-          case "1" -> svc.all().forEach(System.out::println);
-          case "2" -> addFlow(svc);
-          case "3" -> findFlow(svc);
-          case "4" -> updateFlow(svc);
-          case "5" -> deleteFlow(svc);
+          case "1" -> stds.all().forEach(System.out::println);
+          case "2" -> addFlow(stds);
+          case "3" -> findFlow(stds);
+          case "4" -> updateFlow(stds);
+          case "5" -> deleteFlow(stds);
           case "0" -> { System.out.println("Bye!"); return; }
           default -> System.out.println("Invalid choice");
         }
@@ -35,31 +35,31 @@ public class Main {
     }
   }
 
-  static void addFlow(StudentService svc) throws Exception {
+  static void addFlow(StudentService stds) throws Exception {
     System.out.print("Roll No: "); String roll = sc.nextLine();
     System.out.print("Name   : "); String name = sc.nextLine();
     System.out.print("Email  : "); String email = sc.nextLine();
     System.out.print("Branch : "); String branch = sc.nextLine();
     System.out.print("Year(1-5): "); Integer year = Integer.parseInt(sc.nextLine());
-    int id = svc.add(roll, name, email, branch, year);
+    int id = stds.add(roll, name, email, branch, year);
     System.out.println("Created id = " + id);
   }
 
-  static void findFlow(StudentService svc) throws Exception {
+  static void findFlow(StudentService stds) throws Exception {
     System.out.print("Roll No: "); String roll = sc.nextLine();
-    var s = svc.byRoll(roll);
+    var s = stds.byRoll(roll);
     System.out.println(s == null ? "Not found" : s);
   }
 
-  static void updateFlow(StudentService svc) throws Exception {
+  static void updateFlow(StudentService stds) throws Exception {
     System.out.print("Roll No: "); String roll = sc.nextLine();
     System.out.print("New Email: "); String email = sc.nextLine();
-    System.out.println(svc.updateEmail(roll, email) ? "Updated" : "No change");
+    System.out.println(stds.updateEmail(roll, email) ? "Updated" : "No change");
   }
 
-  static void deleteFlow(StudentService svc) throws Exception {
+  static void deleteFlow(StudentService stds) throws Exception {
     System.out.print("Roll No: "); String roll = sc.nextLine();
-    System.out.println(svc.delete(roll) ? "Deleted" : "Not found");
+    System.out.println(stds.delete(roll) ? "Deleted" : "Not found");
   }
 }
 
